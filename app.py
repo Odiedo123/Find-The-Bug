@@ -33,7 +33,7 @@ def submit_bug():
     data = request.get_json()
     report = data.get('description')
     response = client.models.generate_content(
-        model="gemini-2.5-flash-preview",
+        model="gemini-3-flash-preview",
         config=types.GenerateContentConfig(
         system_instruction="Explain the bug in the code in detail in about 20 lines and state if the bug as described by the following text is correct"),
         contents=code_snippet[0] + " " + report

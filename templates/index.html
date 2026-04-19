@@ -47,7 +47,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ description: bugText })
         })
-        .then(response => response.json())
+        .then(response => response.json()) 
         .then(data => showToast(data.output));
             
         });

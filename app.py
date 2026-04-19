@@ -13,12 +13,10 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 
 client = genai.Client()
-
 code_snippet = [""]
 
 @app.route("/")
 def home_page():
-
     user_input = "Give me 30 lines of C++ code"
     response = client.models.generate_content(
         model="gemini-3-flash-preview",

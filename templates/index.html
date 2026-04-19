@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <title>Find the Bug | Home Page</title>
+</head>
+<body>
+    <div id="main-body">    
+        <h1>Find the Bug🐞</h1>
+        <pre><code class="language-cpp">{{ text }}</code></pre>
+    </div>
+    <textarea  id="input" rows="4" cols="50" placeholder="Describe the Bug🐞..."></textarea>
+    <button id="next-button">Next</button>
+    <div id="toast-container"></div>
+    <script>
+      // Show toast messages
+      function showToast(message, type = "info") {
+        const toastContainer = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+
+        toastContainer.appendChild(toast);
+
+        // Remove the toast after the animation ends
+        setTimeout(() => {
+          toast.remove();
+        }, 3500);
+      }
+      const errorMessage = "{{ error }}";
+      console.log("{{error}}");
+      if (errorMessage) {
+        showToast(errorMessage);
+      }
+
+        document.getElementById('next-button').addEventListener('click', () => {
+        const bugText = document.getElementById('input').value;
+
+        fetch('/submit-bug', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ description: bugText })
+        })
+        .then(response => response.json())
+        .then(data => showToast(data.output));
+            
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

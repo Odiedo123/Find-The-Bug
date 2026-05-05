@@ -7,15 +7,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <title>Find the Bug | Home Page</title>
 </head>
 <body>
+  <div class="wave-bg">
+    <!-- Wave 1 -->
+      <svg class="w1" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="#1a6b8a"/>
+        <path d="M1440,60 C1680,100 1920,20 2160,60 C2400,100 2640,20 2880,60 L2880,120 L1440,120 Z" fill="#1a6b8a"/>
+      </svg>
+      <!-- Wave 2 -->
+      <svg class="w2" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C360,90 720,10 1080,50 C1260,70 1380,30 1440,40 L1440,120 L0,120 Z" fill="#1e8cb0"/>
+        <path d="M1440,40 C1800,90 2160,10 2520,50 C2700,70 2820,30 2880,40 L2880,120 L1440,120 Z" fill="#1e8cb0"/>
+      </svg>
+      <!-- Wave 3 -->
+      <svg class="w3" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,70 C180,30 360,90 540,60 C720,30 900,90 1080,60 C1260,30 1380,80 1440,70 L1440,120 L0,120 Z" fill="#0e4f6b"/>
+        <path d="M1440,70 C1620,30 1800,90 1980,60 C2160,30 2340,90 2520,60 C2700,30 2820,80 2880,70 L2880,120 L1440,120 Z" fill="#0e4f6b"/>
+      </svg>
+    </div>
     <div id="main-body">    
         <h1>Find the Bug🐞</h1>
         <pre><code class="language-cpp">{{ text }}</code></pre>
     </div>
-    <textarea  id="input" rows="4" cols="50" placeholder="Describe the Bug🐞..."></textarea>
+	<div class="textarea-glow">
+    	<textarea  id="input" rows="4" cols="50" placeholder="Describe the Bug🐞..."></textarea>
+	</div>
     <button id="next-button">Next</button>
     <div id="toast-container"></div>
     <script>
@@ -25,13 +47,16 @@
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
         toast.textContent = message;
+        toast.style.zIndex = "10000000";
+        toastContainer.style.zIndex = "100000";
 
         toastContainer.appendChild(toast);
 
         // Remove the toast after the animation ends
         setTimeout(() => {
           toast.remove();
-        }, 35000);
+		  location.reload();
+        }, 15000);
       }
       const errorMessage = "{{ error }}";
       console.log("{{error}}");

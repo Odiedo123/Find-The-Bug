@@ -7,12 +7,13 @@ body{
     overflow-x: hidden;
     margin-top: 5vh;
     padding: 0;
-    height: 200vh;
+    height: 150vh;
     width: 100vw; 
 }
 
 h1, p{
-    font-family:"Roboto", sans-serif, serif;
+    font-family:"Google Sans", sans-serif, serif;
+    font-style: italic;
 }
 
 pre{
@@ -26,6 +27,8 @@ code{
 }
 
 #main-body{
+    background: rgba(224, 242, 254, 0.90); 
+  backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,24 +40,82 @@ code{
     padding-bottom: 40px;
     border-top: 0.5px solid rgba(114, 114, 114, 0.75);
     border-left: 0.5px solid rgba(114, 114, 114, 0.75);
-    box-shadow: 10px 10px 5px 0px rgba(114, 114, 114, 0.75);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(146, 146, 146, 0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(119, 119, 119, 0.75);
+}
+
+.textarea-glow {
+  margin-top: 5vh;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  display: inline-block;
+  border-radius: 10px;
 }
 
 
-#input{
+#input {
+    position: relative;
     font-size: 1.3em;
-    margin-top: 5vh;
     width: 70vw;
     height: 50vh;
     border-radius: 10px;
     border: 1px solid grey;
+    background: rgba(224, 242, 254, 0.90);
+    backdrop-filter: blur(8px);
+    transition: 0.5s ease;
+    display: block;  
+    font-family: "Google Sans", Arial, Helvetica, sans-serif;
+    padding: 12px 20px;
+    border-radius: 10px;   
+    outline: none;     
+    resize: vertical;
+    box-sizing: border-box;
 }
 
-#input:focus{
-    border: none;
-    border: 1px solid rgb(32, 207, 255);
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.textarea-glow::after,
+.textarea-glow::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 50%,
+    #ff923f,
+    #ff6f00
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  padding: 4px;
+  border-radius: 10px;
+  animation: 2s spin linear infinite;
+}
+
+.textarea-glow::before {
+  filter: blur(1.5rem);
+  opacity: 1;
+}
+
+@keyframes spin {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.textarea-glow:focus-within::after {
+  opacity: 1;
 }
 
 #next-button{
@@ -76,15 +137,16 @@ code{
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+  z-index: -1000;
 }
 
 .toast {
-  background: rgba(0, 62, 168, 0.4); /* Deep blue tint */
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  background: rgba(10, 22, 48, 0.72);  
+  backdrop-filter: blur(16px);      
+  -webkit-backdrop-filter: blur(16px); 
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
   color: #fff;
   padding: 10px 20px;
   width: 90vw;
@@ -95,7 +157,7 @@ code{
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeIn-m 0.5s forwards, fadeOut-m 0.5s 3s forwards;
+  animation: fadeIn-m 0.5s forwards, fadeOut-m 0.5s 15s forwards;
 }
 
 @keyframes fadeIn-m {
@@ -110,4 +172,30 @@ code{
     opacity: 0;
     transform: translateY(20px);
   }
+}
+
+.wave-bg {
+  position: fixed;        
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;            
+  overflow: hidden;
+  background: linear-gradient(180deg, #0a1628 0%, #0f2e4a 100%);
+}
+
+.wave-bg svg {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200%;            
+  height: auto;
+}
+
+
+.wave-bg .w1 { animation: wave 8s  linear infinite;         opacity: 0.6; }
+.wave-bg .w2 { animation: wave 12s linear infinite reverse; opacity: 0.4; bottom: -20px; }
+.wave-bg .w3 { animation: wave 6s  linear infinite;         opacity: 0.25; bottom: -40px; }
+
+@keyframes wave {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
 }

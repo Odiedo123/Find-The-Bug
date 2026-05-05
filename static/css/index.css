@@ -35,8 +35,9 @@ code{
     align-items: center;
     border-radius: 10px;
     width: 80vw;
-    height: 70vh;
+    height: 72vh;
     padding: 20px;
+    padding-top: 30px;
     padding-bottom: 40px;
     border-top: 0.5px solid rgba(114, 114, 114, 0.75);
     border-left: 0.5px solid rgba(114, 114, 114, 0.75);
